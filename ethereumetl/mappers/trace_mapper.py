@@ -124,7 +124,8 @@ class EthTraceMapper(object):
 
         return trace
 
-    def _iterate_transaction_trace(self, block_number, tx_index, tx_trace, trace_address=[]):
+    def _iterate_transaction_trace(self, block_number, tx_index, tx_trace, trace_address=None):
+        trace_address = [] if trace_address is None else trace_address
         trace = EthTrace()
 
         trace.block_number = block_number
