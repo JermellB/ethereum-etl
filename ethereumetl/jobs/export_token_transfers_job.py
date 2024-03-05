@@ -78,8 +78,7 @@ class ExportTokenTransfersJob(BaseJob):
         events = event_filter.get_all_entries()
         for event in events:
             log = self.receipt_log_mapper.web3_dict_to_receipt_log(event)
-            token_transfer = self.token_transfer_extractor.extract_transfer_from_log(log)
-            if token_transfer is not None:
+            if (token_transfer := self.token_transfer_extractor.extract_transfer_from_log(log)) is not None:
                 self.item_exporter.export_item(self.token_transfer_mapper.token_transfer_to_dict(token_transfer))
 
         self.web3.eth.uninstallFilter(event_filter.filter_id)

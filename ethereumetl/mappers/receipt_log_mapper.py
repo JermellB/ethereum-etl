@@ -47,13 +47,11 @@ class EthReceiptLogMapper(object):
 
         receipt_log.log_index = dict.get('logIndex')
 
-        transaction_hash = dict.get('transactionHash')
-        if transaction_hash is not None:
+        if (transaction_hash := dict.get('transactionHash')) is not None:
             transaction_hash = transaction_hash.hex()
         receipt_log.transaction_hash = transaction_hash
 
-        block_hash = dict.get('blockHash')
-        if block_hash is not None:
+        if (block_hash := dict.get('blockHash')) is not None:
             block_hash = block_hash.hex()
         receipt_log.block_hash = block_hash
 

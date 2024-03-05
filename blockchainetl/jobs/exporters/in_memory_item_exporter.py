@@ -31,8 +31,7 @@ class InMemoryItemExporter:
             self.items[item_type] = []
 
     def export_item(self, item):
-        item_type = item.get('type', None)
-        if item_type is None:
+        if (item_type := item.get('type', None)) is None:
             raise ValueError('type key is not found in item {}'.format(repr(item)))
 
         self.items[item_type].append(item)

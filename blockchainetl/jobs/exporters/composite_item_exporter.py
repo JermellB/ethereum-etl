@@ -55,22 +55,18 @@ class CompositeItemExporter:
             self.export_item(item)
 
     def export_item(self, item):
-        item_type = item.get('type')
-        if item_type is None:
+        if (item_type := item.get('type')) is None:
             raise ValueError('"type" key is not found in item {}'.format(repr(item)))
 
-        exporter = self.exporter_mapping.get(item_type)
-        if exporter is None:
+        if (exporter := self.exporter_mapping.get(item_type)) is None:
             raise ValueError('Exporter for item type {} not found'.format(item_type))
         exporter.export_item(item)
 
-        counter = self.counter_mapping.get(item_type)
-        if counter is not None:
+        if (counter := self.counter_mapping.get(item_type)) is not None:
             counter.increment()
 
     def close(self):
         for item_type, file in self.file_mapping.items():
             close_silently(file)
-            counter = self.counter_mapping[item_type]
-            if counter is not None:
+            if (counter := self.counter_mapping[item_type]) is not None:
                 self.logger.info('{} items exported: {}'.format(item_type, counter.increment() - 1))

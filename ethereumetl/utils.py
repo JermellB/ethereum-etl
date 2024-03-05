@@ -72,8 +72,7 @@ def rpc_response_batch_to_results(response):
 
 
 def rpc_response_to_result(response):
-    result = response.get('result')
-    if result is None:
+    if (result := response.get('result')) is None:
         error_message = 'result is None in response {}.'.format(response)
         if response.get('error') is None:
             error_message = error_message + ' Make sure Ethereum node is synced.'

@@ -36,16 +36,13 @@ class EthTraceMapper(object):
         trace.subtraces = json_dict.get('subtraces')
         trace.trace_address = json_dict.get('traceAddress', [])
 
-        error = json_dict.get('error')
 
-        if error:
+        if error := json_dict.get('error'):
             trace.error = error
 
-        action = json_dict.get('action')
-        if action is None:
+        if (action := json_dict.get('action')) is None:
             action = {}
-        result = json_dict.get('result')
-        if result is None:
+        if (result := json_dict.get('result')) is None:
             result = {}
 
         trace_type = json_dict.get('type')

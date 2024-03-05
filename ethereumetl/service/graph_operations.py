@@ -33,8 +33,7 @@ class GraphOperations(object):
     def get_bounds_for_y_coordinate(self, y):
         """given the y coordinate, outputs a pair of x coordinates for closest points that bound the y coordinate.
         Left and right bounds are equal in case given y is equal to one of the points y coordinate"""
-        initial_bounds = find_best_bounds(y, self._cached_points)
-        if initial_bounds is None:
+        if (initial_bounds := find_best_bounds(y, self._cached_points)) is None:
             initial_bounds = self._get_first_point(), self._get_last_point()
 
         result = self._get_bounds_for_y_coordinate_recursive(y, *initial_bounds)

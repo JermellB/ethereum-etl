@@ -54,8 +54,7 @@ class EthTokenService(object):
 
     def _get_first_result(self, *funcs):
         for func in funcs:
-            result = self._call_contract_function(func)
-            if result is not None:
+            if (result := self._call_contract_function(func)) is not None:
                 return result
         return None
 

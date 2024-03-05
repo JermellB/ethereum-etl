@@ -43,8 +43,7 @@ def get_file_handle(filename, mode='w', binary=False, create_parent_dirs=True):
         dirname = os.path.dirname(filename)
         pathlib.Path(dirname).mkdir(parents=True, exist_ok=True)
     full_mode = mode + ('b' if binary else '')
-    is_file = filename and filename != '-'
-    if is_file:
+    if is_file := filename and filename != '-':
         fh = open(filename, full_mode)
     elif filename == '-':
         fd = sys.stdout.fileno() if mode == 'w' else sys.stdin.fileno()
