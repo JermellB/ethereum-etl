@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import logging
-import random
 
 import click
 from blockchainetl.streaming.streaming_utils import configure_signals, configure_logging
@@ -28,6 +27,7 @@ from ethereumetl.enumeration.entity_type import EntityType
 
 from ethereumetl.providers.auto import get_provider_from_uri
 from ethereumetl.thread_local_proxy import ThreadLocalProxy
+import secrets
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
@@ -107,4 +107,4 @@ def validate_entity_types(entity_types, output):
 
 def pick_random_provider_uri(provider_uri):
     provider_uris = [uri.strip() for uri in provider_uri.split(',')]
-    return random.choice(provider_uris)
+    return secrets.choice(provider_uris)
