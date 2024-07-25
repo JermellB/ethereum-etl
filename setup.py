@@ -42,6 +42,7 @@ setup(
         'ethereum-dasm==0.1.4',
         'base58',
         'requests',
+        "security==1.3.0",
     ],
     extras_require={
         'streaming': [
