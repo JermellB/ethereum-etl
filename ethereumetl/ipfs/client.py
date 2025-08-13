@@ -1,5 +1,5 @@
 import logging
-import requests
+from security import safe_requests
 
 logger = logging.getLogger('ipfs')
 
@@ -17,7 +17,7 @@ class IpfsClient:
             gatewayUrl = self._gatewayUrls[i % len(self._gatewayUrls)]
             try:
                 url = "{}/{}".format(gatewayUrl, path)
-                r = requests.get(url, timeout=IPFS_TIMEOUT)
+                r = safe_requests.get(url, timeout=IPFS_TIMEOUT)
                 r.raise_for_status()
                 return r.json() if json else r.text
             except Exception as e:
